@@ -11,11 +11,14 @@ function App() {
   const [isEditProfilePopupOpen, setIEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
+  const [selectedCard, setSelectedCard] = useState({})
+  const [isImagePopup, setImagePopup] = useState(false)
   
   function closeAllPopups(){
     setIEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
+    setImagePopup(false)
   }
 
   function handleEditProfileClick(){
@@ -30,9 +33,12 @@ function App() {
     setIsEditAvatarPopupOpen(true)
   }
 
-  // function handleclickCardClick(){}
+   function handleCardClick(card){
+    setSelectedCard(card)
+    setImagePopup(true)
+   }
 
-  // function handleclickDeleteClick(){}
+  // function handleDeleteClick(){}
   
   return (
     <>
@@ -42,6 +48,7 @@ function App() {
    onEditProfile = {handleEditProfileClick}
    onAddPlace = {handleAddPlaceClick}
    onEditAvatar = {handleEditAvatarClick}
+   onCardClick = {handleCardClick}
    />
 
    <Footer/>
@@ -143,81 +150,8 @@ function App() {
 
 </PopupWithForm>
 
-<PopupImage />
-
-    {/* <div className="popup popup-profile">
-      <div className="popup-profile__container">
-        <button
-          type="button"
-          className="popup-profile__close-btn popupCloseBtn"
-        />
-        <h2 className="popup-profile__title">Редактировать профиль</h2>
-        <form
-          className="popup-profile__form popup__form"
-          name="popupProfileForm"
-          noValidate=""
-        >
-        
-          <button type="submit" className="popup__button popup-profile__btn">
-            Сохранить
-          </button>
-        </form>
-      </div>
-    </div>
-    <div className="popup popup-card">
-      <div className="popup-card__container">
-        <button type="button" className="popup-card__close-btn popupCloseBtn" />
-        <h2 className="popup-card__title">Новое место</h2>
-        <form
-          className="popup-card__form popup__form"
-          name="popup-card-Form"
-          noValidate=""
-        >
-
-          <button type="submit" className="popup__button">
-            Создать
-          </button>
-        </form>
-      </div>
-    </div> */}
-
-    {/* <div className="popup popup-update">
-      <div className="popup-update__container">
-        <button type="button" className="popup-update__close-btn popupCloseBtn" />
-        <h2 className="popup-update__title">Обновить аватар</h2>
-        <form
-          className="popup-update__form popup__form"
-          name="popupUpdateAvatar"
-          noValidate=""
-        >
-
-          <button type="submit" className="popup__button popup-update__btn">
-            Сохранить
-          </button>
-        </form>
-      </div>
-    </div>
-    <div className="popup popup-delete">
-      <div className="popup-delete__container">
-        <form
-          className="popup-delete__form popup__form"
-          name="popupDeleteCard"
-          noValidate=""
-        >
-          <button
-            type="button"
-            className="popup-delete__close-btn popupCloseBtn"
-          />
-          <h2 className="popup-delete__title">Вы уверены?</h2>
-          <button type="submit" className="popup__button popup-delete__btn">
-            Да
-          </button>
-        </form>
-      </div>
-    </div> */}
-  </>
-  
-  );
-}
+<PopupImage card={selectedCard} isOpen={isImagePopup}  onClose = {closeAllPopups}/>
+</>
+  );}
 
 export default App;
